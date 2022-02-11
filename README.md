@@ -28,8 +28,8 @@ This is a Terraform Module used for creating Dynamic subnets ( both Public and P
    ``` 
  -  Include below variables on your variable.tf,
      - project
-     - Public-Count
-     - Private-Count
+     - Public_Count
+     - Private_Count
      - cidr    
  -  To get the Public Subnet ID's use,
      -  ```sh
