@@ -13,10 +13,13 @@ This is a Terraform Module used for creating Dynamic subnets ( both Public and P
 
 ## To use the Module
 
+-  ```sh
+    git clone https://github.com/ManuGeorge96/terraform_VPC_module_for_dynamic-subnet_creation.git
+   ``` 
 -  Add below Module block on the main terraform code, replace source with correct value.
    ```sh
     module "vpc" {
-      source = "PATH-TO-THE-MODULE/terraform_module_for_dynamic-subnet_creation"
+      source = "PATH-TO-THE-MODULE/terraform_VPC_module_for_dynamic-subnet_creation"
       project = var.project
       Public-Count = var.Public_Count
       Private-Count = var.Private_Count
