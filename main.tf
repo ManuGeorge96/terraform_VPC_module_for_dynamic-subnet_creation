@@ -1,3 +1,6 @@
+###################################################################
+#SECTION - 1
+#####################################################################
 resource "aws_vpc" "vpc-requestor" {
   cidr_block = var.cidr
   enable_dns_hostnames = true
@@ -7,6 +10,8 @@ resource "aws_vpc" "vpc-requestor" {
   }
 }
 #################################################################
+#SECTION - 2
+##################################################################
 locals {
   subnetr = floor(log((var.Public-Count + var.Private-Count) * 2,2))
 }
@@ -36,6 +41,8 @@ resource "aws_subnet" "requestor-Private" {
   }
 }
 #######################################################################
+#SECTION- 3
+#######################################################################
 resource "aws_eip" "requestor-eip" {
   vpc = true
   count = var.Private-Count == "0" ? 0 : 1
@@ -44,6 +51,8 @@ resource "aws_eip" "requestor-eip" {
     Project = "${var.project}"
   }
 }
+#######################################################################
+#SECTION - 4
 #######################################################################
 resource "aws_nat_gateway" "requestor-NAT" {
   count = var.Private-Count == "0" ? 0 : 1
@@ -55,6 +64,8 @@ resource "aws_nat_gateway" "requestor-NAT" {
   }
 }
 #######################################################################
+#SECTION - 5
+######################################################################
 resource "aws_internet_gateway" "requestor-IGw" {
   vpc_id = aws_vpc.vpc-requestor.id
   tags = {
@@ -63,6 +74,8 @@ resource "aws_internet_gateway" "requestor-IGw" {
   }
 }
 #######################################################################
+#SECTION - 6
+########################################################################
 resource "aws_route_table" "requestor-Public-RTB" {
   vpc_id = aws_vpc.vpc-requestor.id
   route {
@@ -90,6 +103,8 @@ resource "aws_route_table" "requestor-Private-RTB" {
   }
 }
 ########################################################################
+#SECTION - 7
+########################################################################
 resource "aws_route_table_association" "requestor-public" {
   count = "${length(aws_subnet.requestor-Public.*.cidr_block)}"
   subnet_id = "${element(aws_subnet.requestor-Public.*.id, count.index)}"
@@ -100,6 +115,8 @@ resource "aws_route_table_association" "requestor-private" {
   subnet_id = "${element(aws_subnet.requestor-Private.*.id, count.index)}"
   route_table_id = aws_route_table.requestor-Private-RTB[0].id
 }
+#########################################################################
+#SECTION - 8
 #########################################################################
 resource "aws_network_acl" "public" {
   vpc_id     = aws_vpc.vpc-requestor.id
