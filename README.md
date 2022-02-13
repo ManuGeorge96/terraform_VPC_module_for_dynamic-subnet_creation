@@ -30,7 +30,7 @@ This is a Terraform Module used for creating Dynamic subnets ( both Public and P
      - project
      - Public_Count
      - Private_Count
-     - cidr    
+     - cidr_vpc    
  -  To get the Public Subnet ID's use,
      -  ```sh
          module.vpc.Public-Subnet-IDs
