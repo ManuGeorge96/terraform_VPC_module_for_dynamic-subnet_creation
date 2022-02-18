@@ -1,3 +1,5 @@
+[![Generic badge](https://img.shields.io/badge/BUILD-PASS-BLUE.svg)](https://shields.io/)
+
 # terraform_module_for_dynamic-subnet_creation
 
 ## About
